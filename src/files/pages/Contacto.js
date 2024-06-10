@@ -307,7 +307,7 @@ const Contacto = (props) => {
                 >
                   <PhoneInput
                     defaultCountry={"PE"}
-                    placeholder="Ingrese número de teléfono "
+                    placeholder="Número de teléfono "
                     value={formData.numero}
                     // onChange={setValue}
                     onChange={(value) =>
