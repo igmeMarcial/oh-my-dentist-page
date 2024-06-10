@@ -1,27 +1,14 @@
 import React, { useState } from "react";
 import dish1 from "../img/anasayfa/dish1.svg";
 import dish2 from "../img/anasayfa/dish2.svg";
-import dish3 from "../img/anasayfa/dish3.svg";
-import dish4 from "../img/anasayfa/dish4.svg";
-import dish5 from "../img/anasayfa/dish5.svg";
-import dish6 from "../img/anasayfa/dish6.svg";
 import banner from "../img/static/Banner1.webp";
-import rightcircle from "../img/anasayfa/Arrow - Right Circle.png";
-import disestetigi from "../img/anasayfa/disestetigi.png";
-import dishimplant from "../img/anasayfa/dishasd.png";
-
-import disbeyazlatma from "../img/anasayfa/disbeyazlatma.png";
-import acildis from "../img/anasayfa/acildis.png";
-import onleme from "../img/anasayfa/onleme.png";
-import { Swiper, SwiperSlide } from "swiper/react";
-import docphoto1 from "../img/anasayfa/doctors/Group 1000001017.png";
-import docphoto2 from "../img/anasayfa/doctors/Group 1000001018.png";
-import docphoto3 from "../img/anasayfa/doctors/Group 1000001019.png";
-import docphoto4 from "../img/anasayfa/doctors/Group 1000001020.png";
-import docphoto5 from "../img/anasayfa/doctors/Mask group.png";
-import AccordionEmre from "./AccordionEmre";
-import oyununkaderi from "../img/anasayfa/oyunkaderi.png";
-import serviceImg1 from "../img/static/servicesImg.jpg";
+import serviceImg1 from "../img/static/tratamientos/periodoncia.JPG";
+import serviceImg2 from "../img/static/tratamientos/endodoncia.JPG";
+import serviceImg3 from "../img/static/tratamientos/curacionesdental.jpg";
+import serviceImg4 from "../img/static/tratamientos/ortodoncia.JPG";
+import serviceImg5 from "../img/static/tratamientos/rehabilitacionOral.JPG";
+import serviceImg6 from "../img/static/tratamientos/edontopedria.jpg";
+import serviceImg7 from "../img/static/tratamientos/esteticadental.jpg";
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
 import Tratamiento from "../../components/Tratamiento";
@@ -29,59 +16,53 @@ import Tratamiento from "../../components/Tratamiento";
 export const serviciosDentales = [
   {
     id: "Periodoncia",
-    img: dish1,
+    img: serviceImg1,
     title: "Cuidamos tus encías para conservar tus dientes.",
     subTitle:
-      "Las enfermedades periodontales afectan a los tejidos que protegen, rodean y soportan a los dientes. En ocasiones puede progresar sin ningún síntoma ni dolor. La ausencia de tratamiento puede originar la movilidad y pérdida prematura de la dentición.",
+      "Protege tus encías con nuestros tratamientos especializados de periodoncia. Prevenimos, diagnosticamos y tratamos enfermedades periodontales para mantener tus encías saludables y tus dientes firmes. Visítanos para una evaluación y mantén tu sonrisa en óptimas condiciones.",
   },
   {
-    id: "PrótesisDental",
-    img: dish2,
+    id: "Endodoncia",
+    img: serviceImg2,
     title: "Masticar correctamente es calidad de vida.",
     subTitle:
-      "Con las prótesis dentales reponemos los dientes perdidos y solucionamos los problemas de aquellos que han sufrido un daño significativo. Para su confección aunamos el arte de las cosas hechas a mano junto con la tecnología más puntera como el escáner intraoral que nos permite ser más precisos, acortar tiempos de tratamiento y evitar las incómodas pastas de toma de impresiones.",
+      "Elimina infecciones y alivia el dolor dental con nuestros tratamientos de endodoncia. Tratamos el interior de tus dientes para conservar tu sonrisa saludable. Confía en nuestros expertos para un cuidado dental efectivo y profesional.",
   },
-  {
-    id: "Sedación",
-    img: dish1,
-    title: "Convertimos el miedo en confort.",
-    subTitle:
-      "La sedación es una opción de tratamiento llevada a cabo por médicos especialistas en anestesia y reanimación que le permitirá afrontar sin miedo ni ansiedad y con total confort cualquier tipo de tratamiento estableciendo un equilibrio entre bienestar y seguridad. Podrá volver acompañado a su domicilio poco después de haber finalizado la intervención.",
-  },
-  {
-    id: "ATM",
-    img: dish1,
-    title: "El fin de los problemas mandibulares.",
-    subTitle:
-      "Los trastornos de la articulación temporo-mandibular (ATM) son problemas relacionados con las articulaciones y musculatura masticatorias. La sintomatología es muy variada como: rechinamiento de los dientes, dolor de la musculatura mandibular especialmente por la mañana, chasquido o dificultad al abrir y/o cerrar la boca, entre otros.",
-  },
+
   {
     id: "Ortodoncia",
-    img: dish1,
+    img: serviceImg4,
     title: "Cuando por fin, todo encaja.",
     subTitle:
-      "En nuestra clínica dental ofrecemos un tratamiento de ortodoncia personalizado para corregir las anomalías de los dientes y huesos maxilares de nuestros pacientes.",
+      "Corrige la alineación de tus dientes y mejora tu mordida con nuestros tratamientos de ortodoncia. Utilizamos brackets y alineadores modernos para lograr una sonrisa perfecta y funcional. Disfruta de una mejor salud dental y una sonrisa más hermosa.",
   },
   {
-    id: "ImplantesDentales",
-    img: dish1,
+    id: "Odontopediatría",
+    img: serviceImg6,
     title: "Sonreír vuelve a tener sentido.",
     subTitle:
-      "Un implante dental es una pieza de titanio diseñada para sustituir la raíz de los dientes perdidos. Realizamos una completa exploración bucodental previa y pruebas radiológicas para poder diagnosticar correctamente al paciente y realizar un plan de tratamiento individual y personalizado.",
+      "Cuidamos la salud dental de los más pequeños con tratamientos especializados. Nuestro equipo de odontopediatras se dedica a crear un ambiente amigable y seguro para que los niños desarrollen hábitos dentales saludables desde temprana edad.",
   },
   {
-    id: "EstéticaDental",
-    img: dish1,
+    id: "Rehabilitación Oral",
+    img: serviceImg5,
+    title: "El fin de los problemas mandibulares.",
+    subTitle:
+      "Restauramos la función y estética de tu boca con prótesis dentales avanzadas. Nuestros tratamientos de rehabilitación oral te ayudarán a recuperar la confianza en tu sonrisa y mejorar tu calidad de vida. Confía en nuestros especialistas para un cuidado dental integral.",
+  },
+  {
+    id: "Estética Dental",
+    img: serviceImg7,
     title: "La sonrisa que buscabas.",
     subTitle:
-      "Conseguir una sonrisa excelente implica que la boca tenga un óptimo estado de salud, que los dientes estén correctamente alineados y que no haya ausencias dentarias.",
+      "Mejora la apariencia de tu sonrisa con nuestros tratamientos de blanqueamiento, carillas y remodelación dental. Logra una sonrisa radiante y confiada con la ayuda de nuestros expertos en estética dental.",
   },
   {
-    id: "CirugíaBucal",
-    img: dish1,
-    title: "Intervenciones sin dolor",
+    id: "Curaciones Dentales",
+    img: serviceImg3,
+    title: "Convertimos el miedo en confort.",
     subTitle:
-      "En IDI realizamos cirugía de muelas del juicio, dientes supernumerarios, exposición de dientes Incluidos, regeneración en maxilares atróficos, frenectomías, elevación de seno, entre otros tratamientos. Disponemos de gabinetes adaptados para poder realizar este tipo de intervenciones mediante sedación endovenosa.",
+      "Restaura la salud y función de tus dientes con nuestras curaciones dentales. Tratamos caries y daños menores para prevenir problemas mayores y mantener tu sonrisa en perfectas condiciones. Confía en nuestra atención experta y cuidadosa.",
   },
 ];
 
@@ -114,7 +95,7 @@ const Tratamientos = () => {
             tratamiento.{" "}
           </h2>
         </div>
-        <div
+        {/* <div
           className={
             "w-full bg3 flex flex-col justify-center items-center py-[50px]  mt-[70px]"
           }
@@ -150,25 +131,17 @@ const Tratamientos = () => {
                 >
                   {servicio.title}{" "}
                 </h1>
-                {/* <div
-                  className={
-                    "flex  md:flex-col lg:flex-row gap-[12px] justify-center items-center pb-6"
-                  }
-                >
-                  <h2 className={"text-lg font4 underline"}>Randevu Oluştur</h2>
-                  <img src={rightcircle} alt="" />
-                </div> */}
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
       {serviciosDentales.map((servicio, index) => (
         <Tratamiento
           key={servicio.id}
           title={servicio.id}
           info={servicio.subTitle}
-          image={serviceImg1}
+          image={servicio.img}
           index={index + 1}
         />
       ))}

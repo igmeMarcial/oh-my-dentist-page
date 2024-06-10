@@ -10,10 +10,10 @@ function Blog({ image, title, text, date }) {
               {date}
             </div>
             <div></div>
-            <h2 className="text-gray-700 text-left uppercase mt-0 mb-[15px] pt-[10px] pb-0 font-roboto font-semibold text-lg leading-none">
+            <h2 className="text-gray-700 text-left uppercase mt-0 mb-[5px] pt-[10px] pb-0 font-roboto font-semibold text-lg leading-5">
               {title}
             </h2>
-            <p className="text-gray-700 font-roboto text-base font-normal leading-[1.5] text-left mt-[10px] mb-[10px]">
+            <p className="leading-5 text-gray-700 font-roboto text-base font-normal  text-left mt-[10px] mb-[10px]">
               {text}
             </p>
           </div>

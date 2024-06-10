@@ -1,7 +1,8 @@
 import React from "react";
 import video1 from "../img/static/videoSmiling.mp4";
-import aboutdoc1 from "../img/static/imageAbout.webp";
-import uzmanlar1 from "../img/hakkimda/uzmanlar1.png";
+import aboutdoc1 from "../img/static/nosotros.JPG";
+import doctora1 from "../img/static/imageDoctor1.png";
+import doctora2 from "../img/static/doctors.jpg";
 import Footer from "./Footer";
 
 import Dentista from "../../components/Dentista";
@@ -26,45 +27,47 @@ const About = () => {
                 "text-lg  2xl:w-[800px] xl:w-[500px] lg:w-[500px] md:w-[700px] sm:w-[500px] w-[310px] mt-[20px] text-text2 font10"
               }
             >
-              Para brindar servicios de calidad, rápidamente. Porque cada
-              paciente es importante para nosotros. Nuestra clínica dental ha
-              brindado atención dental de calidad para toda la familia desde
-              2015. Ya sea que necesite una limpieza dental regular o una
-              cirugía compleja, está en buenas manos con la Dra. Malu y su
-              experimentado equipo. Estamos orgullosos de ofrecer un ambiente
-              cálido y acogedor y de hacer que cada cita sea lo más placentera
-              posible.
+              Nuestra misión principal es brindarle más que un servicio, una
+              atención personalizada y especializada donde se comparta la
+              confianza, la honestidad y la calidez en nuestras atenciones,
+              prevaleciendo el profesionalismo y el trabajo en equipo. Somos
+              capaces de ofertar y realizar todo tipo de tratamientos dentales.
+              Nuestra meta es concientizar a la sociedad sobre el cuidado de la
+              salud oral a través del seguimiento y la prevención. En Clínica Oh
+              my Dentist Perú, estamos a la vanguardia en investigación y
+              desarrollo de nuevas técnicas y materiales que permitan dar
+              soluciones a todos los tratamientos que realizamos.
             </h2>
             <h2
               className={
                 "text-2xl  2xl:w-[800px] xl:w-[500px] lg:w-[500px]  md:w-[700px] sm:w-[500px] w-[320px] mt-[32px] font8"
               }
             >
-              ¿Por qué visitar Oh my dental Perú?
+              ¿Por qué visitar Oh my dentist Perú?
             </h2>
             <h2
               className={
-                "text-lg  2xl:w-[800px] xl:w-[500px] lg:w-[500px]  md:w-[700px] sm:w-[500px] w-[310px] mt-[44px] text-text2 font10"
+                "text-lg  2xl:w-[800px] xl:w-[500px] lg:w-[500px]  md:w-[700px] sm:w-[500px] w-[310px] mt-[44px] md:mt-[20px] text-text2 font10"
               }
             >
-              Nuestras modernas instalaciones están equipadas con instrumentos
-              de alta gama, incluyendo una cámara intraoral y un escáner
-              antiplaca. Ofrecemos citas programadas para evitar esperas
-              innecesarias, garantizando conveniencia para nuestros clientes.
-              Con un enfoque pro-cliente y un equipo de profesionales de primer
-              nivel, proporcionamos tratamientos de higiene dental de calidad
-              que duran una hora completa. Además, nuestro precio final no
-              incluye cargos adicionales, asegurando una excelente relación
-              calidad-precio.
+              Contamos con una moderna infraestructura y equipos de alta gama,
+              incluyendo una cámara intraoral que nos permite visualizar todas
+              las lesiones junto con nuestros pacientes. Ofrecemos citas
+              programadas para evitar esperas innecesarias, garantizando
+              conveniencia para nuestros clientes. Además, nuestros precios
+              finales no incluyen cargos adicionales, asegurando una excelente
+              relación calidad-precio.
             </h2>
           </div>
-          <img
-            className={
-              "xl:w-[453px] md:w-[300px] w-[300px] max-h-[603px] object-contain"
-            }
-            src={aboutdoc1}
-            alt=""
-          />
+          <div>
+            <img
+              className={
+                "  xl:w-[453px]  md:w-[300px] max-h-[300px] w-[300px] xl:max-h-[453px] object-cover rounded-[30px] rounded-[50%]"
+              }
+              src={aboutdoc1}
+              alt=""
+            />
+          </div>
         </div>
         <div className={"mt-[120px] flex flex-col justify-center items-center"}>
           <div className={"flex flex-col justify-center items-center"}>
@@ -89,25 +92,17 @@ const About = () => {
             }
           >
             <Dentista
-              img={uzmanlar1}
-              name="Marcial Igme"
-              specialty="Dentista"
-              biografia="Al Dr. Igme le apasiona crear hermosas sonrisas que impacten positivamente a sus pacientes. Su comportamiento intencionalmente tranquilo y su enfoque minimalista hacia los procedimientos de odontología general le han ganado la confianza y la lealtad de sus pacientes."
+              img={doctora1}
+              name="María Luisa Risco"
+              specialty="odontóloga"
+              biografia="Al Dra. María le apasiona crear hermosas sonrisas que impacten positivamente a sus pacientes. Su comportamiento intencionalmente tranquilo y su enfoque minimalista hacia los procedimientos de odontología general le han ganado la confianza y la lealtad de sus pacientes."
             />
             <hr className={"w-full"} />
             <Dentista
-              img={uzmanlar1}
-              name="Marcial Igme"
-              specialty="Dentista"
-              biografia="El Dr. Marcial es conocido por su compromiso con la excelencia en todo lo que hace por sus pacientes, incluida la colocación de implantes dentales, carillas sin preparación, coronas y puentes, además de realizar endodoncias y cirugía oral."
-            />
-
-            <hr className={"w-full"} />
-            <Dentista
-              img={uzmanlar1}
-              name="Marcial Igme"
-              specialty="Dentista"
-              biografia="El Dr. Marcial es un profesional dedicado que se destaca en todos los aspectos de la odontología, desde empastes y extracciones hasta reconstrucciones bucales completas y procedimientos cosméticos. Fuera de la oficina, al Doctor Levy le gusta hacer caminatas, viajar y explorar nuevas culturas."
+              img={doctora2}
+              name="Equipo de Dentistas"
+              specialty="Especialidades Variadas"
+              biografia="Nuestro equipo de dentistas está compuesto por profesionales altamente calificados en diversas áreas de la odontología. Desde odontología general hasta ortodoncia, implantes dentales, endodoncia y mucho más, nuestro equipo está comprometido con brindar atención de calidad y cuidado personalizado a cada uno de nuestros pacientes."
             />
           </div>
         </div>

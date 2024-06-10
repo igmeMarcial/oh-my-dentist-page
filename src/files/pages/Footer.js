@@ -3,9 +3,13 @@ import gamadent2 from "../img/logoOhMy.jpeg";
 import { Link, NavLink } from "react-router-dom";
 import facebook from "../img/anasayfa/social media/facebook.png";
 import instagram from "../img/anasayfa/social media/instagram.png";
-import linkedin from "../img/anasayfa/social media/linkedin.png";
-import twitter from "../img/anasayfa/social media/twitter.png";
-import youtube from "../img/anasayfa/social media/youtube.png";
+import tiktok from "../img/anasayfa/social media/tiktok.png";
+
+const linkSocialMedia = {
+  fc: "https://www.facebook.com/profile.php?id=61558587249531",
+  intagram: "https://www.instagram.com/ohmydentistperu",
+  titkok: "https://www.tiktok.com/@ohmydentistperu",
+};
 
 const Footer = () => {
   return (
@@ -80,14 +84,14 @@ const Footer = () => {
             Hecho por ® ohmydentistperu.com
           </h1>
           <div className={"flex flex-row gap-5 md:m-0 mt-6 lg:gap-4  "}>
-            <Link to="/">
+            <Link to={linkSocialMedia.fc}>
               <img
                 className={"w-[25px] cursor-pointer"}
                 src={facebook}
                 alt=""
               />
             </Link>
-            <Link>
+            <Link to={linkSocialMedia.intagram}>
               <img
                 className={"w-[25px] cursor-pointer"}
                 src={instagram}
@@ -95,18 +99,7 @@ const Footer = () => {
               />
             </Link>
             <Link>
-              <img
-                className={"w-[25px] cursor-pointer"}
-                src={linkedin}
-                alt=""
-              />
-            </Link>
-            <Link>
-              {" "}
-              <img className={"w-[25px] cursor-pointer"} src={twitter} alt="" />
-            </Link>
-            <Link>
-              <img className={"w-[25px] cursor-pointer"} src={youtube} alt="" />
+              <img className={"w-[25px] cursor-pointer"} src={tiktok} alt="" />
             </Link>
           </div>
         </div>

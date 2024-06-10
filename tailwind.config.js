@@ -4,12 +4,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bg1: "#F4FBFE",
-        bg2: "#98BCD6",
+        bg1: "#fff",
+        bg2: "#b9140b",
         bg3: "#DAE8F24D",
         bg4: "#E9F0F5",
         bg5: "#374857",
-        bg6: "#88ADC8",
+        bg6: "#dc838c",
         bg7: "#B2DFFF",
         text1: "#98BCD6",
         text2: "#3C4959",

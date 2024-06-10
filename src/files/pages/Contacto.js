@@ -9,14 +9,102 @@ import time from "../img/iletisim/time.png";
 import telefon from "../img/iletisim/telefon.png";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import emailjs from "@emailjs/browser";
 
 import Footer from "./Footer";
+
+const initialForm = {
+  nombre: "",
+  apellido: "",
+  correo: "",
+  numero: "",
+  mensaje: "",
+};
 const Contacto = (props) => {
   const { phonen } = props;
   const [value, setValue] = useState();
   const [startDate, setStartDate] = useState(new Date());
+  const [formData, setFormData] = useState(initialForm);
+  const [formErrors, setFormErrors] = useState({
+    nombre: "",
+    correo: "",
+    numero: "",
+    mensaje: "",
+  });
+  const validateForm = () => {
+    let errors = {};
+    let isValid = true;
 
-  useEffect(() => {}, [value]);
+    if (!formData.nombre.trim()) {
+      errors.nombre = "El nombre es requerido";
+      isValid = false;
+    }
+
+    if (!formData.correo.trim()) {
+      errors.correo = "El correo es requerido";
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.correo)) {
+      errors.correo = "El correo no es válido";
+      isValid = false;
+    }
+
+    if (!formData.numero.trim()) {
+      errors.numero = "El número de celular es requerido";
+      isValid = false;
+    }
+
+    if (!formData.mensaje.trim()) {
+      errors.mensaje = "El mensaje es requerido";
+      isValid = false;
+    }
+
+    setFormErrors(errors);
+    return isValid;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      sendEmail();
+    }
+  };
+
+  const sendEmail = () => {
+    const templateParams = {
+      to_name: "María Luisa Risco",
+      from_name: formData.nombre,
+      message: formData.mensaje,
+      email: formData.correo,
+      phone: formData.numero,
+      date: startDate.toLocaleDateString(),
+    };
+
+    emailjs
+      .send("service_hzgaygz", "template_13so0xa", templateParams, {
+        publicKey: "wYgHawbaiSneLzziy",
+      })
+      .then(
+        () => {
+          alert(
+            "El correo se envió correctamente. ¡Pronto te contactaremos para confirmar tu cita!"
+          );
+          console.log("SUCCESS!");
+          setFormData(initialForm);
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+        }
+      );
+  };
+
   return (
     <div className={"mt-[120px]"}>
       <div className={"flex flex-col justify-center items-center"}>
@@ -29,6 +117,7 @@ const Contacto = (props) => {
           ¡Nos encantaría saber de usted! Llámenos o envíenos un correo
           electrónico utilizando la información a continuación.
         </h2>
+        <h2 className="font-bold">Calle. Ontario 156, Chorrillos 15056</h2>
       </div>
       <div
         className={
@@ -39,10 +128,9 @@ const Contacto = (props) => {
           className={"flex flex-col w-[330px] sm:w-[503px] xl:w-fit gap-[20px]"}
         >
           <div className={"relative "}>
-            {/* <img src={harita} alt="" /> */}
             <div className="bg16">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d580.0034648333387!2d-77.04707225826556!3d-12.05846861588262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c91111617523%3A0x5f2808bc2ee542d5!2sEstaci%C3%B3n%20N%C2%B0%2011%20-%20L%C3%ADnea%202%20del%20metro%20Lima%20PARQUE%20MURILLO!5e0!3m2!1sen!2spe!4v1715830361393!5m2!1sen!2spe"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243.7502649611154!2d-76.9997815950192!3d-12.180114256938793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b9d1ef5bd041%3A0x4247265294f33409!2sC.%20Ontario%20156%2C%20Chorrillos%2015056!5e0!3m2!1sen!2spe!4v1717736011326!5m2!1sen!2spe"
                 // width="503"
                 height="325"
                 style={{
@@ -52,7 +140,7 @@ const Contacto = (props) => {
                 }}
                 allowfullscreen=""
                 loading="lazy"
-                title="Mapa de la Estación N° 11 - Línea 2 del metro Lima PARQUE MURILLO"
+                title="C. Ontario 156, Chorrillos 15056"
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
@@ -87,13 +175,13 @@ const Contacto = (props) => {
             <div className={"flex justify-center flex-col"}>
               <h3 className={"font21"}>Horario de antención</h3>
               <h2 className={"font4 text-text2 w-[200px] sm:w-[300px]"}>
-                Lunes - Sabado (9:00am - 18:00pm) Feriados (Cerrado)
+                Lunes - Sabado (8:00am - 21:00pm) Feriados (Solo urgencias)
               </h2>
             </div>
           </div>
           <a
             target="_blank"
-            href="mailto:igmemarcial@gmail.com"
+            href="mailto:oh.mydentist18@gmail.com"
             className={
               " h-[93px] gap-4 pl-[30px] flex justify-start items-center bg15 rounded-[10px]"
             }
@@ -103,7 +191,7 @@ const Contacto = (props) => {
             </div>
             <div className={"flex justify-center flex-col"}>
               <h3 className={"font21"}>Correo Electrónico</h3>
-              <h2 className={"font4 text-text2"}>igmemarcial@gmail.com</h2>
+              <h2 className={"font4 text-text2"}>oh.mydentist18@gmail.com</h2>
             </div>
           </a>
 
@@ -119,7 +207,7 @@ const Contacto = (props) => {
             </div>
             <div className={"flex justify-center flex-col"}>
               <h3 className={"font21"}>Número de Celular</h3>
-              <h2 className={"font4 text-text2"}>965350071</h2>
+              <h2 className={"font4 text-text2"}>994647290</h2>
             </div>
           </a>
 
@@ -135,123 +223,154 @@ const Contacto = (props) => {
             </div>
             <div className={"flex justify-center flex-col"}>
               <h3 className={"font21"}>Whatsapp </h3>
-              <h2 className={"font4 text-text2"}>+51 946250071</h2>
+              <h2 className={"font4 text-text2"}>+51 994647290</h2>
             </div>
           </a>
         </div>
-        <div
-          className={
-            "flex flex-col w-[330px] sm:w-[700px] px-[46px] py-[30px] h-fit bg16"
-          }
-        >
-          <div className={"flex flex-col w-full sm:flex-row gap-[32px]"}>
-            <div className={"flex flex-col gap-[10px]"}>
-              <h4 className={"flex flex-col font21 text-text2"}>Nombre</h4>
-              <div
-                className={
-                  "w-[232px] h-[55px] bg17 flex items-center pl-0 text-text4 font4"
-                }
-              >
-                <input
-                  className={"w-full h-full m-4 border-none outline-none"}
-                  placeholder={"Primer Nombre"}
-                  type="text"
-                  required
-                />
-              </div>
-            </div>
-            <div className={"flex w-full flex-col gap-[10px]"}>
-              <h4 className={"flex flex-col font21 text-text2"}>Apellidos</h4>
-              <div
-                className={
-                  "w-[232px] lg:w-full h-[55px] bg17 flex items-center pl-0 text-text4 font4"
-                }
-              >
-                <input
-                  className={"w-full h-full m-4 border-none outline-none"}
-                  placeholder={"Apellidos"}
-                  type="text"
-                />
-              </div>
-            </div>
-          </div>
-          <div className={"mt-[20px]"}>
-            <div className={"flex flex-col gap-[10px]"}>
-              <h4 className={"flex flex-col font21 text-text2"}>Correo</h4>
-              <div
-                className={
-                  "w-full h-[55px] bg17 flex items-center pl-0 text-text4 font4"
-                }
-              >
-                <input
-                  className={"w-full h-full m-4 border-none outline-none"}
-                  placeholder={"tucorreo@gmail.com"}
-                  type="text"
-                />
-              </div>
-            </div>
-          </div>
-          <div className={"mt-[20px]"}>
-            <div className={"flex flex-col gap-[10px]"}>
-              <h4 className={"flex flex-col font21 text-text2"}>
-                Número de celular
-              </h4>
-              <div
-                className={
-                  "w-full h-[55px] bg17 gap-4 flex items-center pl-4 text-text4 font4"
-                }
-              >
-                <PhoneInput
-                  defaultCountry={"PE"}
-                  placeholder="Ingrese número de teléfono "
-                  value={value}
-                  onChange={setValue}
-                  required
-                />
-              </div>
-            </div>
-          </div>
-          <div className={"mt-[20px]"}>
-            <div className={"flex flex-col gap-[10px]"}>
-              <h4 className={"flex flex-col font21 text-text2"}>Fecha</h4>
-              <div
-                className={
-                  "w-full h-[55px] bg17 flex items-center pl-4 text-text4 font4"
-                }
-              >
-                <DatePicker
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                />
-              </div>
-            </div>
-          </div>
-          <div className={"mt-[20px] h-full w-full"}>
-            <div className={"flex w-full h-full flex-col gap-[10px]"}>
-              <h4 className={"flex flex-col font21 text-text2"}>Mensaje</h4>
-              <div className={"w-full h-full bg17 flex p-4  text-text4 font4"}>
-                <textarea
+        <form onSubmit={handleSubmit}>
+          <div
+            className={
+              "flex flex-col w-[330px] sm:w-[700px] px-[46px] py-[30px] h-fit bg16"
+            }
+          >
+            <div className={"flex flex-col w-full sm:flex-row gap-[32px]"}>
+              <div className={"flex flex-col gap-[10px]"}>
+                <h4 className={"flex flex-col font21 text-text2"}>Nombre</h4>
+                <div
                   className={
-                    "w-full h-[162px] max-h-[162px] flex border-none outline-none"
+                    "w-[232px] h-[55px] bg17 flex items-center pl-0 text-text4 font4"
                   }
-                  placeholder={"Message"}
-                  type="text"
-                />
+                >
+                  <input
+                    className={"w-full h-full m-4 border-none outline-none"}
+                    placeholder={"Primer Nombre"}
+                    type="text"
+                    name="nombre"
+                    value={formData.nombre}
+                    onChange={handleChange}
+                    required
+                  />
+                  {formErrors.nombre && (
+                    <span className="text-red-500">{formErrors.nombre}</span>
+                  )}
+                </div>
+              </div>
+              <div className={"flex w-full flex-col gap-[10px]"}>
+                <h4 className={"flex flex-col font21 text-text2"}>Apellidos</h4>
+                <div
+                  className={
+                    "w-[232px] lg:w-full h-[55px] bg17 flex items-center pl-0 text-text4 font4"
+                  }
+                >
+                  <input
+                    className={"w-full h-full m-4 border-none outline-none"}
+                    placeholder={"Apellidos"}
+                    type="text"
+                    value={formData.apellido}
+                    onChange={handleChange}
+                    name="apellido"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <div className={"mt-[30px] flex justify-center items-center"}>
-            <div
-              className={
-                "bg-bg2 hover:bg-bg7 cursor-pointer w-[250px] h-[55px] px-[15px] flex justify-center items-center py-[30px] rounded-xl"
-              }
-            >
-              <h2 className={"text-white font2 text-[16px]"}>
-                Haga una cita ahora
-              </h2>
+            <div className={"mt-[20px]"}>
+              <div className={"flex flex-col gap-[10px]"}>
+                <h4 className={"flex flex-col font21 text-text2"}>Correo</h4>
+                <div
+                  className={
+                    "w-full h-[55px] bg17 flex items-center pl-0 text-text4 font4"
+                  }
+                >
+                  <input
+                    className={"w-full h-full m-4 border-none outline-none"}
+                    placeholder={"tucorreo@gmail.com"}
+                    type="text"
+                    name="correo"
+                    value={formData.correo}
+                    onChange={handleChange}
+                  />
+                  {formErrors.correo && (
+                    <span className="text-red-500">{formErrors.correo}</span>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className={"mt-[20px]"}>
+              <div className={"flex flex-col gap-[10px]"}>
+                <h4 className={"flex flex-col font21 text-text2"}>
+                  Número de celular
+                </h4>
+                <div
+                  className={
+                    "w-full h-[55px] bg17 gap-4 flex items-center pl-4 text-text4 font4"
+                  }
+                >
+                  <PhoneInput
+                    defaultCountry={"PE"}
+                    placeholder="Ingrese número de teléfono "
+                    value={formData.numero}
+                    // onChange={setValue}
+                    onChange={(value) =>
+                      setFormData({ ...formData, numero: value })
+                    }
+                    required
+                  />
+                  {formErrors.numero && (
+                    <span className="text-red-500">{formErrors.numero}</span>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className={"mt-[20px]"}>
+              <div className={"flex flex-col gap-[10px]"}>
+                <h4 className={"flex flex-col font21 text-text2"}>Fecha</h4>
+                <div
+                  className={
+                    "w-full h-[55px] bg17 flex items-center pl-4 text-text4 font4"
+                  }
+                >
+                  <DatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className={"mt-[20px] h-full w-full"}>
+              <div className={"flex w-full h-full flex-col gap-[10px]"}>
+                <h4 className={"flex flex-col font21 text-text2"}>Mensaje</h4>
+                <div
+                  className={"w-full h-full bg17 flex p-4  text-text4 font4"}
+                >
+                  <textarea
+                    className={
+                      "w-full h-[162px] max-h-[162px] flex border-none outline-none"
+                    }
+                    placeholder={"Message"}
+                    type="text"
+                    name="mensaje"
+                    value={formData.mensaje}
+                    onChange={handleChange}
+                  />
+                  {formErrors.mensaje && (
+                    <span className="text-red-500">{formErrors.mensaje}</span>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className={"mt-[30px] flex justify-center items-center"}>
+              <button
+                className={
+                  "bg-bg2  hover:bg-bg6 cursor-pointer w-[250px] h-[55px] px-[15px] flex justify-center items-center py-[30px] rounded-xl"
+                }
+              >
+                <h2 className={"text-white font2 text-[16px]"}>
+                  Haga una cita ahora
+                </h2>
+              </button>
             </div>
           </div>
-        </div>
+        </form>
       </div>
       <div className={"mt-[120px] md:mt-[150px]"}>
         <div

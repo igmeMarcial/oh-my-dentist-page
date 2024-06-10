@@ -37,7 +37,11 @@ function Tratamiento({ title, info, image, index }) {
             "relative flex justify-center items-center w-full h-full md:mt-0 mt-[80px] px-[24px] pd:mx-0"
           }
         >
-          <img className="rounded-lg object-cover" src={image} alt={title} />
+          <img
+            className="rounded-lg object-cover max-w-[450px] max-h-[500px]"
+            src={image}
+            alt={title}
+          />
         </div>
       </div>
     </section>

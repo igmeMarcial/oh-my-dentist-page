@@ -2,9 +2,9 @@ import "./App.css";
 import Inicio from "./files/pages/Inicio";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Blogs from "./files/pages/Blogs";
-import Blogs1 from "./files/pages/Blogs1";
 
 import whatsapp from "../src/files/img/whatsapp-svgrepo-com (1).svg";
+import avatar from "../src/files/img/static/profile-pic.png";
 import { FloatingWhatsApp } from "react-floating-whatsapp";
 
 import NavBar from "./files/pages/NavBar";
@@ -15,19 +15,33 @@ import About from "./files/pages/Nosotros";
 import Contacto from "./files/pages/Contacto";
 
 function App() {
-  let phoneNumber = "964 350071";
+  let phoneNumber = "987257410";
+  let phoneNumberTwo = "994647290"; //solo was
 
   phoneNumber = phoneNumber.split(" ").join("");
+
+  const message =
+    "Hola, me gustaría hacer una cita en la Clínica Dental. ¿Podrían ayudarme?";
+  const encodedMessage = encodeURIComponent(message);
+  const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
   const [menu, setMenu] = useState(false);
   return (
     <div className="flex justify-start items-center flex-col ">
       <Router>
-        <HeaderTop />
-        <NavBar smenu={menu} setsmenu={setMenu} phonen={phoneNumber} />
+        <HeaderTop phone={phoneNumber} />
+        <NavBar
+          smenu={menu}
+          setsmenu={setMenu}
+          phonen={phoneNumber}
+          link={whatsappLink}
+        />
         <div className={"w-full h-screen"}>
           <Routes>
-            <Route path={"/"} element={<Inicio phonen={phoneNumber} />} />
+            <Route
+              path={"/"}
+              element={<Inicio phonen={phoneNumberTwo} link={whatsappLink} />}
+            />
             <Route
               path={"/services"}
               element={<Tratamientos phonen={phoneNumber} />}
@@ -37,10 +51,6 @@ function App() {
             <Route
               path={"/contact"}
               element={<Contacto phonen={phoneNumber} />}
-            />
-            <Route
-              path={"/blogs/blogs1"}
-              element={<Blogs1 phonen={phoneNumber} />}
             />
           </Routes>
         </div>
@@ -53,11 +63,12 @@ function App() {
         />
       </div>
       <FloatingWhatsApp
-        statusMessage={"Visto por última vez: Oh my Dentis Perú"}
-        chatMessage={"¡Hola! 🤝\n¿En qué puedo ayudarte?"}
-        phoneNumber={"964350071"}
-        accountName={"Oh my Dentis Perú"}
+        statusMessage={"Visto por última vez: Oh my Dentist Perú"}
+        chatMessage={"¡Hola! 🦷\n¿En qué puedo ayudarte?"}
+        phoneNumber={phoneNumberTwo}
+        accountName={"Dra. Maria Luisa Risco"}
         placeholder={"Escribir un mensaje"}
+        avatar={avatar}
       />
     </div>
   );
