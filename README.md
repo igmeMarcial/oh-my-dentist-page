@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+# Oh My Dentist Perú - Official Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Oh My Dentist Perú Logo](src/img/static/news/logo2.png)
 
-## Available Scripts
+This is the official website for **Oh My Dentist Perú**, a modern and professional dental clinic located in Chorrillos, Lima. This project was built with React to provide a fast, responsive, and user-friendly experience for current and prospective patients.
 
-In the project directory, you can run:
+**Live Site:** [www.ohmydentistperu.com](https://www.ohmydentistperu.com) <!-- Replace with your actual domain -->
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Fully Responsive Design:** A seamless experience across all devices, from mobile phones to desktop monitors.
+- **Modern UI/UX:** Clean, professional, and intuitive interface designed to build trust and guide users to take action.
+- **Dynamic SEO:** Integrated `react-helmet-async` for unique, SEO-friendly titles and meta descriptions on every page, boosting search engine visibility.
+- **Interactive Components:** Engaging user experience with smooth animations, carousels for testimonials, and interactive service cards.
+- **Contact & Appointment Form:** A fully functional contact form integrated with **EmailJS** to send appointment requests directly to the clinic.
+- **Detailed Services Pages:** Clear and attractive presentation of all dental treatments offered.
+- **Embedded Google Maps:** Easy-to-find location for the clinic.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠️ Tech Stack
 
-### `npm run build`
+This project was built using a modern frontend stack:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **[React.js](https://reactjs.org/)**: A JavaScript library for building user interfaces.
+- **[React Router](https://reactrouter.com/)**: For declarative routing in the single-page application.
+- **[Tailwind CSS](https://tailwindcss.com/)**: A utility-first CSS framework for rapid UI development.
+- **[React Helmet Async](https://github.com/staylor/react-helmet-async)**: To manage document head changes for SEO.
+- **[EmailJS](https://www.emailjs.com/)**: For sending emails directly from the client-side without a backend server.
+- **[Swiper.js](https://swiperjs.com/)**: For creating modern, touch-friendly carousels (used for testimonials).
+- **[React Icons](https://react-icons.github.io/react-icons/)**: For including popular, high-quality icons.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 📸 Screenshots
 
-### `npm run eject`
+<!-- It's highly recommended to add screenshots of your site! You can upload them to your repo and link them here. -->
+<!-- Example: -->
+<!--
+**Home Page**
+![Home Page Screenshot](link-to-your-homepage-screenshot.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Services Page**
+![Services Page Screenshot](link-to-your-services-page-screenshot.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Contact Page**
+![Contact Page Screenshot](link-to-your-contact-page-screenshot.png)
+-->
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## ⚙️ Getting Started
 
-## Learn More
+To get a local copy up and running, follow these simple steps.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Prerequisites
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [Node.js](https://nodejs.org/) (version 14.x or later recommended)
+- `npm` or `yarn`
 
-### Code Splitting
+### Installation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1.  **Clone the repository:**
 
-### Analyzing the Bundle Size
+    ```sh
+    git clone https://github.com/your-username/oh-my-dentist-peru.git
+    cd oh-my-dentist-peru
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+2.  **Install NPM packages:**
+    ```sh
+    npm install
+    ```
+    or if you use yarn:
+    ```sh
+    yarn install
+    ```
 
-### Making a Progressive Web App
+### Environment Variables
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The contact form uses EmailJS to function. You will need to create an `.env` file in the root of the project and add your EmailJS credentials.
 
-### Advanced Configuration
+1.  Create a file named `.env` in the project root:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+    ```
+    touch .env
+    ```
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2.  Add your EmailJS keys to the `.env` file. You can find these in your EmailJS account dashboard under "Email Services" and "Account".
+    ```env
+    REACT_APP_EMAILJS_SERVICE_ID=your_service_id
+    REACT_APP_EMAILJS_TEMPLATE_ID=your_template_id
+    REACT_APP_EMAILJS_PUBLIC_KEY=your_public_key
+    ```
+    _Note: If you've hardcoded these values in your `Contacto.js` file, you can skip this step. However, using an `.env` file is the recommended and more secure practice._
