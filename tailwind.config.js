@@ -16,6 +16,13 @@ module.exports = {
         text3: "#CFCFCF",
         text4: "#9C9C9C",
         darktext1: "#000000",
+        primary: "#2cb4ad", // El color principal para fondos y textos
+        accent: "#e56334", // El color de acento para botones y links activos (CTA)
+        light: "#f8f9fa", // Un gris muy claro para fondos
+        dark: "#343a40", // Un gris oscuro para texto
+      },
+      animation: {
+        'spin-slow': 'spin 15s linear infinite', // <-- Añade esta línea
       },
     },
   },

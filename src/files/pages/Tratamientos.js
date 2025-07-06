@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import dish1 from "../img/anasayfa/dish1.svg";
-import dish2 from "../img/anasayfa/dish2.svg";
+import React from "react";
 import banner from "../img/static/Banner1.webp";
 import serviceImg1 from "../img/static/tratamientos/periodoncia.JPG";
 import serviceImg2 from "../img/static/tratamientos/endodoncia.JPG";
@@ -9,172 +7,174 @@ import serviceImg4 from "../img/static/tratamientos/ortodoncia.JPG";
 import serviceImg5 from "../img/static/tratamientos/rehabilitacionOral.JPG";
 import serviceImg6 from "../img/static/tratamientos/edontopedria.jpg";
 import serviceImg7 from "../img/static/tratamientos/esteticadental.jpg";
-import Footer from "./Footer";
-import { useNavigate } from "react-router-dom";
-import Tratamiento from "../../components/Tratamiento";
+import { FiArrowDownCircle } from 'react-icons/fi';
+import TratamientoDetallado from "../../components/Tratamiento";
+import { Helmet } from 'react-helmet-async';
+
+
 
 export const serviciosDentales = [
   {
-    id: "Periodoncia",
+    slug: "periodoncia",
+    nombre: "Periodoncia",
     img: serviceImg1,
-    title: "Cuidamos tus encías para conservar tus dientes.",
-    subTitle:
-      "Protege tus encías con nuestros tratamientos especializados de periodoncia. Prevenimos, diagnosticamos y tratamos enfermedades periodontales para mantener tus encías saludables y tus dientes firmes. Visítanos para una evaluación y mantén tu sonrisa en óptimas condiciones.",
+    tagline: "Cuidamos tus encías para conservar tus dientes.",
+    descripcion: "Protege tus encías con nuestros tratamientos especializados. Prevenimos, diagnosticamos y tratamos enfermedades periodontales para mantener tus encías saludables y tus dientes firmes."
   },
   {
-    id: "Endodoncia",
+    slug: "endodoncia",
+    nombre: "Endodoncia",
     img: serviceImg2,
-    title: "Masticar correctamente es calidad de vida.",
-    subTitle:
-      "Elimina infecciones y alivia el dolor dental con nuestros tratamientos de endodoncia. Tratamos el interior de tus dientes para conservar tu sonrisa saludable. Confía en nuestros expertos para un cuidado dental efectivo y profesional.",
+    tagline: "Masticar correctamente es calidad de vida.",
+    descripcion: "Elimina infecciones y alivia el dolor dental. Tratamos el interior de tus dientes para conservar tu sonrisa saludable. Confía en nuestros expertos para un cuidado efectivo y profesional."
   },
-
   {
-    id: "Ortodoncia",
+    slug: "ortodoncia",
+    nombre: "Ortodoncia",
     img: serviceImg4,
-    title: "Cuando por fin, todo encaja.",
-    subTitle:
-      "Corrige la alineación de tus dientes y mejora tu mordida con nuestros tratamientos de ortodoncia. Utilizamos brackets y alineadores modernos para lograr una sonrisa perfecta y funcional. Disfruta de una mejor salud dental y una sonrisa más hermosa.",
+    tagline: "Cuando por fin, todo encaja.",
+    descripcion: "Corrige la alineación de tus dientes y mejora tu mordida con brackets y alineadores modernos para lograr una sonrisa perfecta y funcional."
   },
   {
-    id: "Odontopediatría",
+    slug: "Odontopediatría",
     img: serviceImg6,
-    title: "Sonreír vuelve a tener sentido.",
-    subTitle:
+    tagline: "Sonreír vuelve a tener sentido.",
+    nombre: "Odontopediatría",
+    descripcion:
       "Cuidamos la salud dental de los más pequeños con tratamientos especializados. Nuestro equipo de odontopediatras se dedica a crear un ambiente amigable y seguro para que los niños desarrollen hábitos dentales saludables desde temprana edad.",
   },
   {
-    id: "Rehabilitación Oral",
+    slug: "Rehabilitación Oral",
     img: serviceImg5,
-    title: "El fin de los problemas mandibulares.",
-    subTitle:
+    tagline: "El fin de los problemas mandibulares.",
+    nombre: "Rehabilitación Oral",
+    descripcion:
       "Restauramos la función y estética de tu boca con prótesis dentales avanzadas. Nuestros tratamientos de rehabilitación oral te ayudarán a recuperar la confianza en tu sonrisa y mejorar tu calidad de vida. Confía en nuestros especialistas para un cuidado dental integral.",
   },
   {
-    id: "Estética Dental",
+    slug: "Estética Dental",
     img: serviceImg7,
-    title: "La sonrisa que buscabas.",
-    subTitle:
+    tagline: "La sonrisa que buscabas.",
+    nombre: "Estética Dental",
+    descripcion:
       "Mejora la apariencia de tu sonrisa con nuestros tratamientos de blanqueamiento, carillas y remodelación dental. Logra una sonrisa radiante y confiada con la ayuda de nuestros expertos en estética dental.",
   },
   {
-    id: "Curaciones Dentales",
+    slug: "Curaciones Dentales",
     img: serviceImg3,
-    title: "Convertimos el miedo en confort.",
-    subTitle:
+    tagline: "Convertimos el miedo en confort.",
+    nombre: "Curaciones Dentales",
+    descripcion:
       "Restaura la salud y función de tus dientes con nuestras curaciones dentales. Tratamos caries y daños menores para prevenir problemas mayores y mantener tu sonrisa en perfectas condiciones. Confía en nuestra atención experta y cuidadosa.",
   },
 ];
 
-const Tratamientos = () => {
-  const navigate = useNavigate();
-  const handleRedirect = (item) => {
-    navigate(`${item}`);
-
-    window.scrollTo(0, 0);
+const Tratamientos = (props) => {
+  // Función para el scroll suave
+  const handleScrollTo = (e, targetId) => {
+    e.preventDefault();
+    document.getElementById(targetId)?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
   };
 
   return (
-    <div className={"w-full h-full"}>
-      <div className={"mt-[140px]"}>
-        <div className={"flex flex-col justify-center items-center"}>
-          <h2
-            className={
-              "font1 xl:text-6xl text-5xl 2xl:text-6xl text-center md:text-start"
-            }
-          >
-            Nuestros tratamientos
-          </h2>
-          <h2
-            className={
-              "font4 text-lg xl:text-xl w-[320px] md:w-[450px] lg:w-[515px] mt-[40px] text-text2 text-center"
-            }
-          >
-            Ortodoncia, cirugía bucal, implantes... Disponemos del equipo
-            profesional y las instalaciones más avanzadas para llevar a cabo su
-            tratamiento.{" "}
-          </h2>
+    <div className="bg-white">
+      <Helmet>
+        <title>Oh My Dentist Perú | Tratamientos</title>
+        <meta name="description" content="Ofrecemos una amplia gama de tratamientos dentales, desde ortodoncia hasta estética dental. Agenda tu cita con la Dra. María Luisa Risco." />
+        <link rel="canonical" href="https://www.ohmydentistperu.com/services" />
+      </Helmet>
+      {/* =================================================================== */}
+      {/* SECCIÓN 1: HÉROE DE LA PÁGINA                                     */}
+      {/* =================================================================== */}
+      <section
+        className="relative bg-cover bg-center text-white py-24 md:py-32"
+        style={{ backgroundImage: `url(${banner})` }}
+      >
+        <div className="absolute inset-0 bg-dark bg-opacity-60"></div>
+        <div className="container mx-auto px-6 text-center relative z-10">
+          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
+            Nuestros Tratamientos
+          </h1>
+          <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto opacity-90">
+            Desde ortodoncia hasta implantes, disponemos del equipo profesional y las instalaciones más avanzadas para devolverle la salud y estética a tu sonrisa.
+          </p>
         </div>
-        {/* <div
-          className={
-            "w-full bg3 flex flex-col justify-center items-center py-[50px]  mt-[70px]"
-          }
-        >
-          <div
-            className={
-              " w-fit rounded-lg grid md:grid-row grid-cols2 md:grid-cols-2 lg:grid-cols-3 flex-col px-[35px]  py-[50px] gap-[30px] justify-center items-center h-fit lg:h-fit"
-            }
-          >
+      </section>
+
+      {/* =================================================================== */}
+      {/* SECCIÓN 2: GALERÍA DE SERVICIOS                                     */}
+      {/* =================================================================== */}
+      <section className="py-20 bg-light">
+        <div className="container mx-auto px-6 md:px-12">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-dark">Explora Nuestros Servicios</h2>
+            <p className="mt-2 text-gray-600">Haz clic en un tratamiento para ver más detalles.</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {serviciosDentales.map((servicio) => (
-              <div
-                key={servicio.id}
-                className={
-                  "2xl:w-[400px] xl:w-[330px] lg:w-[300px] md:w-[320px] w-full py-[15px] md:px-[20px] lg:px-[35px] md:h-[450px] lg:h-full gap-[16px] rounded-xl  bg-white flex justify-start items-center flex-col"
-                }
+              <a
+                key={servicio.slug}
+                href={`#${servicio.slug}`}
+                onClick={(e) => handleScrollTo(e, servicio.slug)}
+                className="group block bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 text-center"
               >
-                <img
-                  className={"xl:w-[60px] lg:w-[50px]"}
-                  src={servicio.img}
-                  alt=""
-                />
-                <h1
-                  className={
-                    "font2 text-black lg:text-xl md:text-2xl text-2xl text-center xl:text-2xl"
-                  }
-                >
-                  {servicio.id}
-                </h1>
-                <h1
-                  className={
-                    "font4 text-text2 px-4 md:h-[170px] lg:h-32 2xl:text-lg text-base text-center "
-                  }
-                >
-                  {servicio.title}{" "}
-                </h1>
-              </div>
+                <h3 className="text-xl font-bold text-dark group-hover:text-primary transition-colors">
+                  {servicio.nombre}
+                </h3>
+                <p className="text-gray-500 text-sm mt-2">{servicio.tagline}</p>
+                <div className="mt-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity flex justify-center items-center gap-2">
+                  <span className="font-semibold text-sm">Ver detalles</span>
+                  <FiArrowDownCircle />
+                </div>
+              </a>
             ))}
           </div>
-        </div> */}
+        </div>
+      </section>
+      
+      {/* =================================================================== */}
+      {/* SECCIÓN 3: DETALLE DE CADA TRATAMIENTO                            */}
+      {/* =================================================================== */}
+      <div >
+        {serviciosDentales.map((servicio, index) => (
+          <TratamientoDetallado
+            key={servicio.slug}
+            id={servicio.slug}
+            nombre={servicio.nombre}
+            descripcion={servicio.descripcion}
+            image={servicio.img}
+            index={index}
+            whatsappLink={props.whatsappLink} // <-- Pasa el link de WhatsApp
+          />
+        ))}
       </div>
-      {serviciosDentales.map((servicio, index) => (
-        <Tratamiento
-          key={servicio.id}
-          title={servicio.id}
-          info={servicio.subTitle}
-          image={servicio.img}
-          index={index + 1}
-        />
-      ))}
 
-      <section className={"mt-[120px]"}>
-        <div
-          style={{
-            backgroundImage: `url(${banner})`,
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-          }}
-          className={
-            "w-full h-fit bg-bg5 md:p-16 p-16 lg:p-12 xl:gap-[60px] sm:p-16  flex justify-center items-center md:flex-col lg:flex-row flex-col"
-          }
-        >
-          <div
-            className={
-              "flex flex-col justify-center md:items-start items-center  md:p-0 "
-            }
-          >
-            <h1
-              className={
-                "font1 text-white text-3xl w-[330px] lg:text-3xl xl:text-5xl sm:w-[400px] md:text-3xl md:w-[400px] lg:w-[500px] xl:w-[650px] leading-8"
-              }
+      {/* =================================================================== */}
+      {/* SECCIÓN 4: CTA FINAL                                              */}
+      {/* =================================================================== */}
+      <section className="bg-primary text-white">
+        <div className="container mx-auto px-6 py-16 text-center">
+          <h2 className="text-3xl font-extrabold">¿Listo para transformar tu sonrisa?</h2>
+          <p className="mt-3 max-w-2xl mx-auto opacity-90">
+            Estamos emocionados de servirte a ti y a tu familia. ¡Contacta con nosotros hoy mismo para programar una cita!
+          </p>
+          <div className="mt-8">
+            <a 
+              href={props.whatsappLink} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-block bg-accent text-white font-bold py-3 px-10 rounded-lg shadow-lg hover:bg-opacity-90 transform hover:scale-105 transition-all"
             >
-              Estamos emocionados de servirle a usted y a su familia. ¡Llame hoy
-              para programar citas!
-            </h1>
+              Agendar mi Cita
+            </a>
           </div>
         </div>
       </section>
 
-      <Footer />
+      {/* No olvides importar y añadir el Footer si no está en App.js */}
     </div>
   );
 };

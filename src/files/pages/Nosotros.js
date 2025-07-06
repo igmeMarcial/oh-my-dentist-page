@@ -1,139 +1,123 @@
-import React from "react";
-import video1 from "../img/static/videoSmiling.mp4";
-import aboutdoc1 from "../img/static/nosotros.JPG";
+  import React from "react";
+
+import videoSmiling from "../img/static/videoSmiling.mp4";
+import aboutImage from "../img/static/nosotros.JPG";
 import doctora1 from "../img/static/imageDoctor1.png";
 import doctora2 from "../img/static/doctors.jpg";
-import Footer from "./Footer";
+import DentistaCard from "../../components/DentistaCard";
+import { Helmet } from 'react-helmet-async';
 
-import Dentista from "../../components/Dentista";
+
+
+
 const About = () => {
   return (
-    <div className={"mt-[140px] flex justify-center items-center"}>
-      <div className={"w-full h-full"}>
-        <div className={"flex justify-center items-center"}>
-          <h2 className={"font1 text-5xl sm:text-6xl"}>Nosotros</h2>
+    <div className="bg-white">
+      <Helmet>
+        <title>Oh My Dentist Perú | Nosotros</title>
+        <meta name="description" content="Conoce más sobre nuestra clínica, nuestra misión, nuestros valores y nuestro equipo de profesionales." />
+        <link rel="canonical" href="https://www.ohmydentistperu.com/about" />
+      </Helmet>
+      {/* =================================================================== */}
+      {/* SECCIÓN 1: HÉROE - QUIÉNES SOMOS                                    */}
+      {/* =================================================================== */}
+      <section className="bg-light py-20 md:py-28 text-center">
+        <div className="container mx-auto px-6">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-dark">
+            Sobre Nosotros
+          </h1>
+          <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-gray-600">
+            Conoce la misión, los valores y el equipo que hacen de Oh My Dentist Perú tu mejor opción para el cuidado dental.
+          </p>
         </div>
-        <div
-          className={
-            "mt-[70px] w-full flex justify-center items-center md:flex-col flex-col lg:flex-row 2xl:flex-row gap-[80px]"
-          }
-        >
-          <div className={"flex flex-col "}>
-            <div className={"mt-[15px] w-fit text-3xl sm:text-4xl font1"}>
-              Nuestro Misión
-            </div>
-            <h2
-              className={
-                "text-lg  2xl:w-[800px] xl:w-[500px] lg:w-[500px] md:w-[700px] sm:w-[500px] w-[310px] mt-[20px] text-text2 font10"
-              }
-            >
-              Nuestra misión principal es brindarle más que un servicio, una
-              atención personalizada y especializada donde se comparta la
-              confianza, la honestidad y la calidez en nuestras atenciones,
-              prevaleciendo el profesionalismo y el trabajo en equipo. Somos
-              capaces de ofertar y realizar todo tipo de tratamientos dentales.
-              Nuestra meta es concientizar a la sociedad sobre el cuidado de la
-              salud oral a través del seguimiento y la prevención. En Clínica Oh
-              my Dentist Perú, estamos a la vanguardia en investigación y
-              desarrollo de nuevas técnicas y materiales que permitan dar
-              soluciones a todos los tratamientos que realizamos.
-            </h2>
-            <h2
-              className={
-                "text-2xl  2xl:w-[800px] xl:w-[500px] lg:w-[500px]  md:w-[700px] sm:w-[500px] w-[320px] mt-[32px] font8"
-              }
-            >
-              ¿Por qué visitar Oh my dentist Perú?
-            </h2>
-            <h2
-              className={
-                "text-lg  2xl:w-[800px] xl:w-[500px] lg:w-[500px]  md:w-[700px] sm:w-[500px] w-[310px] mt-[44px] md:mt-[20px] text-text2 font10"
-              }
-            >
-              Contamos con una moderna infraestructura y equipos de alta gama,
-              incluyendo una cámara intraoral que nos permite visualizar todas
-              las lesiones junto con nuestros pacientes. Ofrecemos citas
-              programadas para evitar esperas innecesarias, garantizando
-              conveniencia para nuestros clientes. Además, nuestros precios
-              finales no incluyen cargos adicionales, asegurando una excelente
-              relación calidad-precio.
-            </h2>
-          </div>
-          <div>
-            <img
-              className={
-                "  xl:w-[453px]  md:w-[300px] max-h-[300px] w-[300px] xl:max-h-[453px] object-cover rounded-[30px] rounded-[50%]"
-              }
-              src={aboutdoc1}
-              alt=""
-            />
-          </div>
-        </div>
-        <div className={"mt-[120px] flex flex-col justify-center items-center"}>
-          <div className={"flex flex-col justify-center items-center"}>
-            <h2
-              className={
-                "font1 text-3xl sm:text-4xl w-[330px] lg:text-4xl xl:text-5xl md:text-5xl md:w-[500px] lg:w-fit text-center"
-              }
-            >
-              Nuestro Equipo
-            </h2>
-            <h2
-              className={
-                "font4 text-lg md:text-xl w-[310px] sm:w-[400px] md:w-[515px] mt-[40px] text-text2 text-center"
-              }
-            >
-              Conozca más de cerca a nuestros expertos
-            </h2>
-          </div>
-          <div
-            className={
-              "mt-[120px] gap-[70px] flex flex-col justify-center items-center"
-            }
-          >
-            <Dentista
-              img={doctora1}
-              name="María Luisa Risco"
-              specialty="odontóloga"
-              biografia="Al Dra. María le apasiona crear hermosas sonrisas que impacten positivamente a sus pacientes. Su comportamiento intencionalmente tranquilo y su enfoque minimalista hacia los procedimientos de odontología general le han ganado la confianza y la lealtad de sus pacientes."
-            />
-            <hr className={"w-full"} />
-            <Dentista
-              img={doctora2}
-              name="Equipo de Dentistas"
-              specialty="Especialidades Variadas"
-              biografia="Nuestro equipo de dentistas está compuesto por profesionales altamente calificados en diversas áreas de la odontología. Desde odontología general hasta ortodoncia, implantes dentales, endodoncia y mucho más, nuestro equipo está comprometido con brindar atención de calidad y cuidado personalizado a cada uno de nuestros pacientes."
-            />
-          </div>
-        </div>
-        {/* Here abaut tegnology */}
-        <div className={"mt-[120px]"}>
-          <div
-            className={
-              "w-full bg-text2   flex   justify-center items-center md:h-[550px] lg:h-[550px] relative "
-            }
-          >
-            <video
-              src={video1} // Ruta del archivo de video
-              type="video/mp4" // Tipo de archivo de video
-              className="w-full h-full" // Establecer el ancho al 100% del contenedor
-              autoPlay
-              loop
-              muted
-            />
-            {/* here video */}
-            <h2
-              className={
-                "font1 text-3xl sm:text-5xl lg:text-6xl absolute text-center text-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-              }
-            >
-              Tu sonrisa es tu mejor carta de presentación
-            </h2>
-          </div>
-        </div>
+      </section>
 
-        <Footer />
-      </div>
+      {/* =================================================================== */}
+      {/* SECCIÓN 2: MISIÓN Y FILOSOFÍA                                     */}
+      {/* =================================================================== */}
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Columna de Texto */}
+            <div className="text-gray-700 space-y-8">
+              <div>
+                <h2 className="text-3xl font-bold text-dark mb-4">Nuestra Misión</h2>
+                <p className="leading-relaxed">
+                  Nuestra misión principal es brindarle más que un servicio, una atención personalizada y especializada donde se comparta la confianza, la honestidad y la calidez en nuestras atenciones, prevaleciendo el profesionalismo y el trabajo en equipo. Somos capaces de ofertar y realizar todo tipo de tratamientos dentales. Nuestra meta es concientizar a la sociedad sobre el cuidado de la salud oral a través del seguimiento y la prevención. En Clínica Oh my Dentist Perú, estamos a la vanguardia en investigación y desarrollo de nuevas técnicas y materiales que permitan dar soluciones a todos los tratamientos que realizamos.
+                </p>
+              </div>
+              <div>
+                <h2 className="text-3xl font-bold text-dark mb-4">¿Por qué visitarnos?</h2>
+                <p className="leading-relaxed">
+                  Contamos con una moderna infraestructura y equipos de alta gama, incluyendo una cámara intraoral que nos permite visualizar todas las lesiones junto con nuestros pacientes. Ofrecemos citas programadas para evitar esperas innecesarias, garantizando conveniencia para nuestros clientes. Además, nuestros precios finales no incluyen cargos adicionales, asegurando una excelente relación calidad-precio.
+                </p>
+              </div>
+            </div>
+            {/* Columna de Imagen */}
+            <div className="flex justify-center">
+              <img
+                src={aboutImage}
+                alt="Instalaciones de la clínica"
+                className="shadow-2xl xl:w-[453px]  md:w-[300px] max-h-[300px] w-[300px] xl:max-h-[453px] object-cover rounded-[50%]"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =================================================================== */}
+      {/* SECCIÓN 3: NUESTRO EQUIPO                                         */}
+      {/* =================================================================== */}
+      <section className="py-16 md:py-24 bg-light">
+        <div className="container mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-dark">
+            Nuestro Equipo
+          </h2>
+          <p className="mt-4 text-lg max-w-2xl mx-auto text-gray-600">
+            Profesionales apasionados y dedicados a tu sonrisa.
+          </p>
+          <div className="mt-12 max-w-4xl mx-auto space-y-16">
+            <DentistaCard
+              img={doctora1}
+              name="Dra. María Luisa Risco"
+              specialty="Odontóloga General"
+              biografia="A la Dra. María le apasiona crear hermosas sonrisas que impacten positivamente a sus pacientes. Su comportamiento intencionalmente tranquilo y su enfoque minimalista hacia los procedimientos de odontología general le han ganado la confianza y la lealtad de sus pacientes."
+              isReversed={false}
+            />
+            <DentistaCard
+              img={doctora2}
+              name="Nuestro Equipo de Especialistas"
+              specialty="Especialidades Variadas"
+              biografia="Nuestro equipo de dentistas está compuesto por profesionales altamente calificados en diversas áreas. Desde odontología general hasta ortodoncia, implantes y endodoncia, nuestro equipo está comprometido con brindar atención de calidad y cuidado personalizado a cada uno de nuestros pacientes."
+              isReversed={true}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* =================================================================== */}
+      {/* SECCIÓN 4: VIDEO DE FILOSOFÍA                                     */}
+      {/* =================================================================== */}
+      <section className="relative h-[60vh] min-h-[400px] w-full flex items-center justify-center">
+        <video
+          src={videoSmiling}
+          className="absolute top-0 left-0 w-full h-full object-cover"
+          autoPlay
+          loop
+          muted
+          playsInline // Importante para autoplay en móviles
+        />
+        {/* Overlay para legibilidad */}
+        <div className="absolute inset-0 bg-dark bg-opacity-50"></div>
+        {/* Texto */}
+        <div className="relative z-10 text-center px-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight shadow-text">
+            Tu sonrisa es tu mejor carta de presentación
+          </h2>
+        </div>
+      </section>
+
+      {/* No olvides el Footer */}
     </div>
   );
 };

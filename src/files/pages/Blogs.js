@@ -1,20 +1,19 @@
-import React, { useState } from "react";
-
-import Footer from "./Footer";
+import React from "react";
 
 import { useNavigate } from "react-router-dom";
 import { articulos } from "../../data/data";
 import Blog from "../../components/Blog";
+import { Helmet } from 'react-helmet-async';
 import "./blogs.css";
 const Blogs = () => {
   const navigate = useNavigate();
-  const handleRedirect = (item) => {
-    navigate(`${item}`);
-
-    window.scrollTo(0, 0);
-  };
   return (
     <div className={" flex flex-col"}>
+      <Helmet>
+        <title>Oh My Dentist Perú | Blogs</title>
+        <meta name="description" content="Explora nuestros blogs para obtener información valiosa sobre odontología, consejos y más." />
+        <link rel="canonical" href="https://www.ohmydentistperu.com/blogs" />
+      </Helmet>
       <section className={" section-main-container "}>
         <div className="main-container-blog">
           <div
@@ -33,7 +32,6 @@ const Blogs = () => {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   );
 };

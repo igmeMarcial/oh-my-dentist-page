@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from "react";
-import "../../App.css";
+import React, { useState } from "react";
 import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
-import chorrillos from "../img/static/Chorrillos.jpg";
-import chat from "../img/iletisim/chat.png";
-import pin from "../img/iletisim/pin 1.png";
-import time from "../img/iletisim/time.png";
-import telefon from "../img/iletisim/telefon.png";
+import PhoneInput, { isPossiblePhoneNumber } from "react-phone-number-input";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import emailjs from "@emailjs/browser";
+import { FiMapPin, FiClock, FiMail, FiPhone, FiMessageSquare } from 'react-icons/fi';
+import chorrillosImage from "../img/static/Chorrillos.jpg";
+import { phoneNumberTwo } from "../../App";
+import { Helmet } from 'react-helmet-async';
 
-import Footer from "./Footer";
 
 const initialForm = {
   nombre: "",
@@ -19,383 +16,198 @@ const initialForm = {
   correo: "",
   numero: "",
   mensaje: "",
+  fecha: new Date(),
 };
+
 const Contacto = (props) => {
   const { phonen } = props;
-  const [value, setValue] = useState();
-  const [startDate, setStartDate] = useState(new Date());
   const [formData, setFormData] = useState(initialForm);
-  const [formErrors, setFormErrors] = useState({
-    nombre: "",
-    correo: "",
-    numero: "",
-    mensaje: "",
-  });
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // --- Lógica del Formulario (mejorada) ---
   const validateForm = () => {
-    let errors = {};
-    let isValid = true;
-
-    if (!formData.nombre.trim()) {
-      errors.nombre = "El nombre es requerido";
-      isValid = false;
-    }
-
+    const errors = {};
+    if (!formData.nombre.trim()) errors.nombre = "El nombre es requerido.";
     if (!formData.correo.trim()) {
-      errors.correo = "El correo es requerido";
-      isValid = false;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.correo)) {
-      errors.correo = "El correo no es válido";
-      isValid = false;
+      errors.correo = "El correo es requerido.";
+    } else if (!/\S+@\S+\.\S+/.test(formData.correo)) {
+      errors.correo = "El formato del correo no es válido.";
     }
-
-    if (!formData.numero.trim()) {
-      errors.numero = "El número de celular es requerido";
-      isValid = false;
+    if (!formData.numero) {
+      errors.numero = "El número es requerido.";
+    } else if (!isPossiblePhoneNumber(formData.numero)) {
+      errors.numero = "El número de teléfono no es válido.";
     }
-
-    if (!formData.mensaje.trim()) {
-      errors.mensaje = "El mensaje es requerido";
-      isValid = false;
-    }
-
+    if (!formData.mensaje.trim()) errors.mensaje = "El mensaje es requerido.";
+    
     setFormErrors(errors);
-    return isValid;
+    return Object.keys(errors).length === 0;
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({ ...formData, [name]: value });
+  };
+  
+  const handlePhoneChange = (value) => {
+    setFormData({ ...formData, numero: value });
+  };
+  
+  const handleDateChange = (date) => {
+    setFormData({ ...formData, fecha: date });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      sendEmail();
+      setIsSubmitting(true);
+      const templateParams = {
+        to_name: "María Luisa Risco",
+        from_name: `${formData.nombre} ${formData.apellido}`,
+        message: formData.mensaje,
+        email: formData.correo,
+        phone: formData.numero,
+        date: formData.fecha.toLocaleDateString('es-ES'),
+      };
+
+      emailjs.send("service_hzgaygz", "template_13so0xa", templateParams, "wYgHawbaiSneLzziy")
+        .then(() => {
+          alert("¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.");
+          setFormData(initialForm);
+        })
+        .catch((error) => {
+          alert("Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo.");
+          console.error("FAILED...", error.text);
+        })
+        .finally(() => {
+          setIsSubmitting(false);
+        });
     }
   };
-
-  const sendEmail = () => {
-    const templateParams = {
-      to_name: "María Luisa Risco",
-      from_name: formData.nombre,
-      message: formData.mensaje,
-      email: formData.correo,
-      phone: formData.numero,
-      date: startDate.toLocaleDateString(),
-    };
-
-    emailjs
-      .send("service_hzgaygz", "template_13so0xa", templateParams, {
-        publicKey: "wYgHawbaiSneLzziy",
-      })
-      .then(
-        () => {
-          alert(
-            "El correo se envió correctamente. ¡Pronto te contactaremos para confirmar tu cita!"
-          );
-          console.log("SUCCESS!");
-          setFormData(initialForm);
-        },
-        (error) => {
-          console.log("FAILED...", error.text);
-        }
-      );
-  };
+  
+  // --- Componente de Tarjeta de Información ---
+  const InfoCard = ({ icon, title, content, href }) => (
+    <a href={href} target="_blank" rel="noopener noreferrer" className="flex items-start gap-4 p-4 rounded-lg hover:bg-light transition-colors">
+      <div className="flex-shrink-0 text-primary">{icon}</div>
+      <div>
+        <h3 className="font-bold text-dark">{title}</h3>
+        <p className="text-gray-600">{content}</p>
+      </div>
+    </a>
+  );
 
   return (
-    <div className={"mt-[120px]"}>
-      <div className={"flex flex-col justify-center items-center"}>
-        <h2 className={"font1 text-5xl"}>Contáctenos</h2>
-        <h2
-          className={
-            "font4 text-sm sm:w-[415px] w-[315px] mt-[20px] text-text2 text-center"
-          }
-        >
-          ¡Nos encantaría saber de usted! Llámenos o envíenos un correo
-          electrónico utilizando la información a continuación.
-        </h2>
-        <h2 className="font-bold">Calle. Ontario 156, Chorrillos 15056</h2>
-      </div>
-      <div
-        className={
-          "flex mt-[80px] items-center justify-center gap-16 xl:gap-8 flex-col xl:flex-row"
-        }
-      >
-        <div
-          className={"flex flex-col w-[330px] sm:w-[503px] xl:w-fit gap-[20px]"}
-        >
-          <div className={"relative "}>
-            <div className="bg16">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243.7502649611154!2d-76.9997815950192!3d-12.180114256938793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b9d1ef5bd041%3A0x4247265294f33409!2sC.%20Ontario%20156%2C%20Chorrillos%2015056!5e0!3m2!1sen!2spe!4v1717736011326!5m2!1sen!2spe"
-                // width="503"
-                height="325"
-                style={{
-                  border: 0,
-                  borderRadius: "30px",
-                  width: "100%",
-                }}
-                allowfullscreen=""
-                loading="lazy"
-                title="C. Ontario 156, Chorrillos 15056"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
-            </div>
-            {/* <div
-              className={"absolute w-full px-[20px] pb-[20px] bottom-0 left-0"}
-            >
-              <div
-                className={
-                  " h-[93px] gap-4 pl-[30px] flex justify-start items-center bg-white rounded-[10px]"
-                }
-              >
-                <div
-                  className={"w-12 h-12 bg13 flex justify-center items-center"}
-                >
-                  <img src={konum} alt="" />
-                </div>
-                <div className={"flex justify-center flex-col"}>
-                  <h3 className={"font21"}>Avenida</h3>
-                  <h2 className={"font4 text-text2"}>No se sabe</h2>
-                </div>
-              </div>
-            </div> */}
-          </div>
-          <div
-            className={
-              " h-[118px] gap-4 pl-[30px] flex justify-start items-center bg15 rounded-[10px]"
-            }
-          >
-            <div className={"w-12 h-12 bg13 flex justify-center items-center"}>
-              <img src={time} alt="" />
-            </div>
-            <div className={"flex justify-center flex-col"}>
-              <h3 className={"font21"}>Horario de antención</h3>
-              <h2 className={"font4 text-text2 w-[200px] sm:w-[300px]"}>
-                Lunes - Sabado (8:00am - 21:00pm) Feriados (Solo urgencias)
-              </h2>
-            </div>
-          </div>
-          <a
-            target="_blank"
-            href="mailto:oh.mydentist18@gmail.com"
-            className={
-              " h-[93px] gap-4 pl-[30px] flex justify-start items-center bg15 rounded-[10px]"
-            }
-          >
-            <div className={"w-12 h-12 bg13 flex justify-center items-center"}>
-              <img src={pin} alt="" />
-            </div>
-            <div className={"flex justify-center flex-col"}>
-              <h3 className={"font21"}>Correo Electrónico</h3>
-              <h2 className={"font4 text-text2"}>oh.mydentist18@gmail.com</h2>
-            </div>
-          </a>
-
-          <a
-            target={"_blank"}
-            href={`tel:${phonen}`}
-            className={
-              " h-[93px] gap-4 pl-[30px] flex justify-start items-center bg15 rounded-[10px]"
-            }
-          >
-            <div className={"w-12 h-12 bg13 flex justify-center items-center"}>
-              <img src={telefon} alt="" />
-            </div>
-            <div className={"flex justify-center flex-col"}>
-              <h3 className={"font21"}>Número de Celular</h3>
-              <h2 className={"font4 text-text2"}>994647290</h2>
-            </div>
-          </a>
-
-          <a
-            target={"_blank"}
-            href={`https://api.whatsapp.com/send/?phone=9${phonen}&text&type=phone_number&app_absent=0`}
-            className={
-              " h-[93px] gap-4 pl-[30px] flex justify-start items-center bg15 rounded-[10px]"
-            }
-          >
-            <div className={"w-12 h-12 bg13 flex justify-center items-center"}>
-              <img src={chat} alt="" />
-            </div>
-            <div className={"flex justify-center flex-col"}>
-              <h3 className={"font21"}>Whatsapp </h3>
-              <h2 className={"font4 text-text2"}>+51 994647290</h2>
-            </div>
-          </a>
+    <div className="bg-white">
+      <Helmet>
+        <title>Oh My Dentist Perú | Contacto</title>
+        <meta name="description" content="Contáctanos para agendar una cita, enviar consultas o simplemente saludarnos. Estamos para servirte." />
+        <link rel="canonical" href="https://www.ohmydentistperu.com/contact" />
+      </Helmet>
+      {/* =================================================================== */}
+      {/* SECCIÓN 1: HÉROE DE CONTACTO                                      */}
+      {/* =================================================================== */}
+      <section className="bg-light py-20 md:py-28 text-center">
+        <div className="container mx-auto px-6">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-dark">Contáctanos</h1>
+          <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-gray-600">
+            ¡Nos encantaría saber de ti! Llámanos, envíanos un correo o completa el formulario para agendar tu cita.
+          </p>
         </div>
-        <form onSubmit={handleSubmit}>
-          <div
-            className={
-              "flex flex-col w-[330px] sm:w-[700px] px-[46px] py-[30px] h-fit bg16"
-            }
-          >
-            <div className={"flex flex-col w-full sm:flex-row gap-[32px]"}>
-              <div className={"flex flex-col gap-[10px]"}>
-                <h4 className={"flex flex-col font21 text-text2"}>Nombre</h4>
-                <div
-                  className={
-                    "w-[232px] h-[55px] bg17 flex items-center pl-0 text-text4 font4"
-                  }
-                >
-                  <input
-                    className={"w-full h-full m-4 border-none outline-none"}
-                    placeholder={"Primer Nombre"}
-                    type="text"
-                    name="nombre"
-                    value={formData.nombre}
-                    onChange={handleChange}
-                    required
-                  />
-                  {formErrors.nombre && (
-                    <span className="text-red-500">{formErrors.nombre}</span>
-                  )}
-                </div>
+      </section>
+
+      {/* =================================================================== */}
+      {/* SECCIÓN 2: INFORMACIÓN Y FORMULARIO                               */}
+      {/* =================================================================== */}
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+            
+            {/* Columna Izquierda: Información de Contacto */}
+            <div className="lg:col-span-2 space-y-6">
+              <h2 className="text-3xl font-bold text-dark mb-6">Información de la Clínica</h2>
+              <div className="space-y-4">
+                <InfoCard icon={<FiMapPin size={24} />} title="Dirección" content="C. Ontario 156, Chorrillos 15056" href="https://maps.app.goo.gl/TuEjxUfE9N3c5W6d9" />
+                <InfoCard icon={<FiClock size={24} />} title="Horario de Atención" content="L-S: 8:00am - 9:00pm" />
+                <InfoCard icon={<FiMail size={24} />} title="Correo Electrónico" content="oh.mydentist18@gmail.com" href="mailto:oh.mydentist18@gmail.com" />
+                <InfoCard icon={<FiPhone size={24} />} title="Teléfono" content={phonen} href={`tel:${phonen}`} />
+                <InfoCard icon={<FiMessageSquare size={24} />} title="WhatsApp" content={phoneNumberTwo} href={`https://wa.me/51994647290`} />
               </div>
-              <div className={"flex w-full flex-col gap-[10px]"}>
-                <h4 className={"flex flex-col font21 text-text2"}>Apellidos</h4>
-                <div
-                  className={
-                    "w-[232px] lg:w-full h-[55px] bg17 flex items-center pl-0 text-text4 font4"
-                  }
-                >
-                  <input
-                    className={"w-full h-full m-4 border-none outline-none"}
-                    placeholder={"Apellidos"}
-                    type="text"
-                    value={formData.apellido}
-                    onChange={handleChange}
-                    name="apellido"
-                  />
-                </div>
+              <div className="mt-8 rounded-2xl overflow-hidden shadow-lg">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243.7502649611154!2d-76.9997815950192!3d-12.180114256938793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b9d1ef5bd041%3A0x4247265294f33409!2sC.%20Ontario%20156%2C%20Chorrillos%2015056!5e0!3m2!1sen!2spe!4v1717736011326!5m2!1sen!2spe"
+                  height="300"
+                  style={{ border: 0, width: '100%' }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  title="Ubicación de la clínica"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
               </div>
             </div>
-            <div className={"mt-[20px]"}>
-              <div className={"flex flex-col gap-[10px]"}>
-                <h4 className={"flex flex-col font21 text-text2"}>Correo</h4>
-                <div
-                  className={
-                    "w-full h-[55px] bg17 flex items-center pl-0 text-text4 font4"
-                  }
-                >
-                  <input
-                    className={"w-full h-full m-4 border-none outline-none"}
-                    placeholder={"tucorreo@gmail.com"}
-                    type="text"
-                    name="correo"
-                    value={formData.correo}
-                    onChange={handleChange}
-                  />
-                  {formErrors.correo && (
-                    <span className="text-red-500">{formErrors.correo}</span>
-                  )}
+
+            {/* Columna Derecha: Formulario */}
+            <div className="lg:col-span-3 bg-light p-8 rounded-2xl shadow-lg">
+              <h2 className="text-3xl font-bold text-dark mb-6">Agenda una Cita</h2>
+              <form onSubmit={handleSubmit} noValidate>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Nombre y Apellido */}
+                  <div>
+                    <label htmlFor="nombre" className="block text-sm font-medium text-gray-700">Nombre</label>
+                    <input type="text" name="nombre" id="nombre" value={formData.nombre} onChange={handleChange} placeholder="Tu nombre" className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary" />
+                    {formErrors.nombre && <p className="mt-1 text-sm text-red-600">{formErrors.nombre}</p>}
+                  </div>
+                  <div>
+                    <label htmlFor="apellido" className="block text-sm font-medium text-gray-700">Apellido</label>
+                    <input type="text" name="apellido" id="apellido" value={formData.apellido} onChange={handleChange} placeholder="Tu apellido" className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary" />
+                  </div>
+                  {/* Correo y Teléfono */}
+                  <div>
+                    <label htmlFor="correo" className="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                    <input type="email" name="correo" id="correo" value={formData.correo} onChange={handleChange} placeholder="tu@correo.com" className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary" />
+                    {formErrors.correo && <p className="mt-1 text-sm text-red-600">{formErrors.correo}</p>}
+                  </div>
+                  <div>
+                     <label htmlFor="numero" className="block text-sm font-medium text-gray-700 ">Número de Teléfono</label>
+                     <PhoneInput defaultCountry="PE" value={formData.numero} onChange={handlePhoneChange} className="mt-1 react-phone-input pl-4 text-text4 font4 bg17 h-[49px]" />
+                     {formErrors.numero && <p className="mt-1 text-sm text-red-600">{formErrors.numero}</p>}
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className={"mt-[20px]"}>
-              <div className={"flex flex-col gap-[10px]"}>
-                <h4 className={"flex flex-col font21 text-text2"}>
-                  Número de celular
-                </h4>
-                <div
-                  className={
-                    "w-full h-[55px] bg17 gap-4 flex items-center pl-4 text-text4 font4"
-                  }
-                >
-                  <PhoneInput
-                    defaultCountry={"PE"}
-                    placeholder="Número de teléfono "
-                    value={formData.numero}
-                    // onChange={setValue}
-                    onChange={(value) =>
-                      setFormData({ ...formData, numero: value })
-                    }
-                    required
-                  />
-                  {formErrors.numero && (
-                    <span className="text-red-500">{formErrors.numero}</span>
-                  )}
+                {/* Fecha */}
+                <div className="mt-6">
+                  <label htmlFor="fecha" className="block text-sm font-medium text-gray-700">Fecha de Preferencia</label>
+                  <DatePicker selected={formData.fecha} onChange={handleDateChange} className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary" dateFormat="dd/MM/yyyy" />
                 </div>
-              </div>
-            </div>
-            <div className={"mt-[20px]"}>
-              <div className={"flex flex-col gap-[10px]"}>
-                <h4 className={"flex flex-col font21 text-text2"}>Fecha</h4>
-                <div
-                  className={
-                    "w-full h-[55px] bg17 flex items-center pl-4 text-text4 font4"
-                  }
-                >
-                  <DatePicker
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                  />
+                {/* Mensaje */}
+                <div className="mt-6">
+                  <label htmlFor="mensaje" className="block text-sm font-medium text-gray-700">Mensaje</label>
+                  <textarea name="mensaje" id="mensaje" rows="4" value={formData.mensaje} onChange={handleChange} placeholder="Cuéntanos el motivo de tu consulta..." className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"></textarea>
+                  {formErrors.mensaje && <p className="mt-1 text-sm text-red-600">{formErrors.mensaje}</p>}
                 </div>
-              </div>
-            </div>
-            <div className={"mt-[20px] h-full w-full"}>
-              <div className={"flex w-full h-full flex-col gap-[10px]"}>
-                <h4 className={"flex flex-col font21 text-text2"}>Mensaje</h4>
-                <div
-                  className={"w-full h-full bg17 flex p-4  text-text4 font4"}
-                >
-                  <textarea
-                    className={
-                      "w-full h-[162px] max-h-[162px] flex border-none outline-none"
-                    }
-                    placeholder={"Message"}
-                    type="text"
-                    name="mensaje"
-                    value={formData.mensaje}
-                    onChange={handleChange}
-                  />
-                  {formErrors.mensaje && (
-                    <span className="text-red-500">{formErrors.mensaje}</span>
-                  )}
+                {/* Botón de envío */}
+                <div className="mt-8 text-right">
+                  <button type="submit" disabled={isSubmitting} className="inline-flex justify-center py-3 px-8 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-accent hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent disabled:bg-gray-400">
+                    {isSubmitting ? "Enviando..." : "Enviar Mensaje"}
+                  </button>
                 </div>
-              </div>
-            </div>
-            <div className={"mt-[30px] flex justify-center items-center"}>
-              <button
-                className={
-                  "bg-bg2  hover:bg-bg6 cursor-pointer w-[250px] h-[55px] px-[15px] flex justify-center items-center py-[30px] rounded-xl"
-                }
-              >
-                <h2 className={"text-white font2 text-[16px]"}>
-                  Haga una cita ahora
-                </h2>
-              </button>
+              </form>
             </div>
           </div>
-        </form>
-      </div>
-      <div className={"mt-[120px] md:mt-[150px]"}>
-        <div
-          className={
-            "w-full bg-text2   flex   justify-center items-center md:h-[550px] lg:h-[550px] relative "
-          }
-        >
-          <img
-            src={chorrillos}
-            className="w-full h-full"
-            style={{ opacity: 0.5 }}
-          />
+        </div>
+      </section>
 
-          <h2
-            className={
-              "font1 text-1xl font-bold sm:text-3xl lg:text-4xl absolute text-center text-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-            }
-          >
-            Nuestra oficina está disponible para responder sus preguntas y
-            evaluar sus síntomas.
+      {/* =================================================================== */}
+      {/* SECCIÓN 3: BANNER FINAL                                           */}
+      {/* =================================================================== */}
+      <section className="relative h-[50vh] min-h-[350px] w-full flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: `url(${chorrillosImage})` }}>
+        <div className="absolute inset-0 bg-dark bg-opacity-60"></div>
+        <div className="relative z-10 text-center px-6">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight shadow-text">
+            Nuestra clínica está lista para responder tus preguntas y evaluar tus síntomas.
           </h2>
         </div>
-      </div>
-
-      <Footer />
+      </section>
+      
     </div>
   );
 };

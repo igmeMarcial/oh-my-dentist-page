@@ -190,7 +190,7 @@
     border: 1px solid var(--Sky-blue-Design, #98BCD6);
 }
 .bg17{
-    border-radius: 10px;
+    border-radius: 6px;
     border: 1px solid var(--gray-300, #D0D5DD);
     background: var(--White, #FFF);
 
@@ -209,3 +209,6 @@
         transform: rotate(30deg);
     }
 }
+
+
+
