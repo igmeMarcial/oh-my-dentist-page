@@ -1,6 +1,6 @@
 # Oh My Dentist Perú - Official Website
 
-![Oh My Dentist Perú Logo](src/img/static/news/logo2.png)
+![Oh My Dentist Perú Logo](https://www.ohmydentistperu.com/logoOh.ico)
 
 This is the official website for **Oh My Dentist Perú**, a modern and professional dental clinic located in Chorrillos, Lima. This project was built with React to provide a fast, responsive, and user-friendly experience for current and prospective patients.
 
