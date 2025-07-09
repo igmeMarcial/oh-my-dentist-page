@@ -43,7 +43,10 @@ const About = () => {
               <div>
                 <h2 className="text-3xl font-bold text-dark mb-4">Nuestra Misión</h2>
                 <p className="leading-relaxed">
-                  Nuestra misión principal es brindarle más que un servicio, una atención personalizada y especializada donde se comparta la confianza, la honestidad y la calidez en nuestras atenciones, prevaleciendo el profesionalismo y el trabajo en equipo. Somos capaces de ofertar y realizar todo tipo de tratamientos dentales. Nuestra meta es concientizar a la sociedad sobre el cuidado de la salud oral a través del seguimiento y la prevención. En Clínica Oh my Dentist Perú, estamos a la vanguardia en investigación y desarrollo de nuevas técnicas y materiales que permitan dar soluciones a todos los tratamientos que realizamos.
+                En OhMyDentistPeru, nuestra misión es construir, junto a ti, un nuevo concepto de salud bucal: sin miedos, sin juicios y con decisiones compartidas.
+Aquí no solo tratamos dientes: te escuchamos, te explicamos y caminamos contigo en cada etapa del proceso.
+Creemos que cuando el paciente entiende, confía y se involucra, la odontología deja de ser una obligación... y se convierte en un acto de autocuidado.
+Somos un equipo, y tu bienestar es nuestra meta común.
                 </p>
               </div>
               <div>

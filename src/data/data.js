@@ -19,7 +19,13 @@ export const articulos = [
     id: 2,
     title: "Cómo curar las aftas bucales",
     textInfo:
-      "La estomatitis aftosa, comúnmente conocida como aftas bucales, es una afección muy molesta pero inofensiva de la cavidad oral.",
+      `La estomatitis aftosa, comúnmente conocida como aftas bucales, es una afección muy molesta pero inofensiva de la cavidad oral.Son úlceras superficiales, de forma redonda u ovalada, con un centro blanco o amarillento y bordes rojizos. No son contagiosas y no deben confundirse con el herpes labial, que sí es causado por un virus. Aunque suelen desaparecer solas en 7 a 14 días. Mantén una buena higiene bucal, evita alimentos irritantes.
+
+Es importante que vengas a consulta si:
+- La afta dura más de 2 semanas
+- Es muy dolorosa o impide comer/hablar
+- Las aftas son recurrentes o múltiples 
+- Notas fiebre, malestar general o ganglios inflamados`,
     text: "",
     posted: "1 de febrero de 2024",
     imgUrl: articles2,
@@ -28,7 +34,14 @@ export const articulos = [
     id: 3,
     title: "Miedo al dentista: cómo combatir la dentofobia",
     textInfo:
-      "El miedo al dentista es la dentofobia, una enfermedad real reconocida por la Organización Mundial de la Salud.",
+      `El miedo al dentista es la dentofobia, una enfermedad real reconocida por la Organización Mundial de la Salud. Lo primero que debes saber es que no estás solo. Como profesionales, estamos preparados para tratar no solo tus dientes, sino también tu ansiedad. Puedes contarnos cómo te sientes: estamos aquí para ayudarte, no para juzgarte.
+      
+Entiende que tu miedo es válido (y superable)
+Acordaremos una señal para pausar
+Platicaremos para conocer mejor sobre tus dudas y miedos
+El ambiente lo adaptaremos a tu comodidad, con buena música, podcast o TV.
+Practicaremos respiración profunda
+Ven a una cita de evaluación sin compromiso`,
     text: "",
     posted: "5 de marzo de 2024",
     imgUrl: articles3,
@@ -55,7 +68,16 @@ export const articulos = [
     id: 8,
     title: "Caries dental",
     textInfo:
-      "Muchas personas evitan el tratamiento de las caries porque le temen al dentista. Simplemente sea fuerte y encuentre el coraje para programar una cita, sin avergonzarse de que la última vez que se hizo una limpieza dental fue hace más de 15 años",
+      `Es una lesión progresiva del diente causada por bacterias que se alimentan de los restos de alimentos (especialmente azúcares) y producen ácidos. 
+      
+En las primeras etapas, la caries no duele y puede pasar desapercibida.
+
+Algunos signos de caries incluyen:
+- Manchas blancas, marrones o negras en los dientes
+- Sensibilidad al frío, calor o dulce
+- Dolor leve o fuerte al masticar
+- Mal aliento persistente
+- Agujero visible en el diente (en etapas avanzadas)`,
     text: "Esta nueva forma de Coronavirus (2019-nCoV, COVID-19) está alarmado a la población mundial. En Perú...",
     posted: "15 de marzo de 2024",
     imgUrl: articles6,

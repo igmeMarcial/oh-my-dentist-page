@@ -51,7 +51,7 @@ function App() {
         statusMessage={"En línea"}
         chatMessage={"¡Hola! 🦷\n¿Cómo podemos ayudarte?"}
         phoneNumber={phoneNumberTwo}
-        accountName={"Clínica Dental Sonrisa Perfecta"} // Nombre más amigable
+        accountName={"Ohmydentistperu"} 
         placeholder={"Escribe tu mensaje..."}
         avatar={avatar}
         notification

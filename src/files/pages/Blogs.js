@@ -1,12 +1,9 @@
 import React from "react";
-
-import { useNavigate } from "react-router-dom";
 import { articulos } from "../../data/data";
 import Blog from "../../components/Blog";
 import { Helmet } from 'react-helmet-async';
 import "./blogs.css";
 const Blogs = () => {
-  const navigate = useNavigate();
   return (
     <div className={" flex flex-col"}>
       <Helmet>
@@ -16,20 +13,17 @@ const Blogs = () => {
       </Helmet>
       <section className={" section-main-container "}>
         <div className="main-container-blog">
-          <div
-            style={{ marginLeft: "-10px", marginRight: "-10px" }}
-            className="collection-list"
-          >
-            {articulos.map((item, index) => (
-              <Blog
-                key={item.id}
-                image={item.imgUrl}
-                title={item.title}
-                text={item.textInfo}
-                date={item.posted}
-              />
-            ))}
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          {articulos.map((item) => (
+            <Blog
+              key={item.id}
+              image={item.imgUrl}
+              title={item.title}
+              text={item.textInfo}
+              date={item.posted}
+            />
+          ))}
+        </div>
         </div>
       </section>
     </div>

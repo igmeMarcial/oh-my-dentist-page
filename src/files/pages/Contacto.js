@@ -127,7 +127,8 @@ const Contacto = (props) => {
             <div className="lg:col-span-2 space-y-6">
               <h2 className="text-3xl font-bold text-dark mb-6">Información de la Clínica</h2>
               <div className="space-y-4">
-                <InfoCard icon={<FiMapPin size={24} />} title="Dirección" content="C. Ontario 156, Chorrillos 15056" href="https://maps.app.goo.gl/TuEjxUfE9N3c5W6d9" />
+                <InfoCard icon={<FiMapPin size={24} />} title="Sede Chorrillos" content="C. Ontario 156, Chorrillos 15056" href="https://maps.app.goo.gl/TuEjxUfE9N3c5W6d9" />
+                <InfoCard icon={<FiMapPin size={24} />} title="Sede Miraflores" content="C. Cantuarias 160, Edificio Residencial, Miraflores" href="https://maps.app.goo.gl/yrLGW3TTxJMrJ4RRA" />
                 <InfoCard icon={<FiClock size={24} />} title="Horario de Atención" content="L-S: 8:00am - 9:00pm" />
                 <InfoCard icon={<FiMail size={24} />} title="Correo Electrónico" content="oh.mydentist18@gmail.com" href="mailto:oh.mydentist18@gmail.com" />
                 <InfoCard icon={<FiPhone size={24} />} title="Teléfono" content={phonen} href={`tel:${phonen}`} />

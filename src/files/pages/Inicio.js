@@ -55,7 +55,8 @@ const Inicio = (props) => {
                   Agendar Cita Ahora
                 </a>
                 <a
-                  href={`tel:${phonen}`}
+                  href={whatsappLink}
+                  target="_blank"
                   className="flex items-center justify-center gap-3 px-8 py-4 bg-transparent border-2 border-primary text-primary font-bold rounded-lg hover:bg-primary hover:text-white transition-colors duration-300"
                 >
                   <FiPhone size={20} />
